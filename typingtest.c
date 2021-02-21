@@ -27,9 +27,9 @@ void get_random_words(int, char **, char *, int);
 // compile with -lncurses
 int main(int argc, char **argv)
 {   
-    const char word_delimiter = '\n';
+    const char word_delimiter = '|';
     const char* word_list_path = 
-        "10000_english_words_medium.txt";
+        "fingers.txt";
     unsigned long start, end; // timestamps
     double time_taken;
     
