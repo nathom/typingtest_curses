@@ -27,7 +27,7 @@ void get_random_words(int, char **, char *, int);
 // compile with -lncurses
 int main(int argc, char **argv)
 {   
-    const char word_delimiter = '|';
+    const char word_delimiter = '\n';
     const char* word_list_path = 
         "fingers.txt";
     unsigned long start, end; // timestamps
@@ -55,13 +55,20 @@ int main(int argc, char **argv)
 
     FILE *file = fopen(word_list_path, "r");
 
+    /* Get the number of words in the file so that we
+     * can allocate the correct amount of memory */
     while ((c = fgetc(file)) != EOF)
         if (c ==  word_delimiter)
             num_words++;
 
-    char *word_bank[num_words];
+    if (num_words <= words_in_test) {
+        printf(":", word_delimiter, word_list_path);
+        exit(1);
+    }
 
-    fseek(file, 0, 0);
+    char *word_bank[num_words]; // allocate space
+
+    fseek(file, 0, 0); // move file pointer to start of file
     get_words(file, word_bank, word_delimiter);
     fclose(file);
 
