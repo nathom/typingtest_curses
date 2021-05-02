@@ -27,9 +27,8 @@ void get_random_words(int, char **, char *, int);
 // compile with -lncurses
 int main(int argc, char **argv)
 {   
-    const char word_delimiter = '\n';
-    const char* word_list_path = 
-        "fingers.txt";
+    const char word_delimiter = '|';
+    const char* word_list_path = "fingers.txt";
     unsigned long start, end; // timestamps
     double time_taken;
     
@@ -62,7 +61,8 @@ int main(int argc, char **argv)
             num_words++;
 
     if (num_words <= words_in_test) {
-        printf(":", word_delimiter, word_list_path);
+        printf("error: only found %d words, requested %d words\n", num_words, 
+                words_in_test);
         exit(1);
     }
 
